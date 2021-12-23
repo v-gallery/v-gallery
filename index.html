@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Virtual Art Gallery & Admin panel for management" />
+    <title>v-gallery</title>
+
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <i class="fa-brands fa-accusoft fa-flip" style="--fa-animation-duration: 3s;"></i>
+
+    <script>
+        import { library, icon } from '@fortawesome/fontawesome-svg-core'
+        import { faCamera } from '@fortawesome/free-solid-svg-icons'
+
+        library.add(faCamera)
+
+        const camera = icon({ prefix: 'fas', iconName: 'camera' })
+    </script>
+    <!-- 
+        Browser:
+        var camera = window.FontAwesome.icon({ prefix: 'fas', iconName: 'camera' })
+     -->
+</body>
+
+</html>
