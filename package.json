@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/v-gallery/v-gallery.git"
+    "url": "git+https://github.com/v-gallery/v-gallery.github.io.git"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/v-gallery/v-gallery/issues"
   },
-  "homepage": "https://github.com/v-gallery/v-gallery#readme",
+  "homepage": "https://github.com/v-gallery/v-gallery.github.io#readme",
   "dependencies": {
     "lit-html": "2.0.2",
     "page": "1.11.6"
