@@ -7,7 +7,7 @@ export const login = api.login;
 export const register = api.register;
 export const logout = api.logout;
 
-// Implement application-specific requests
+
 function createPointer(name, id) {
     return {
         __type: 'Pointer', 
