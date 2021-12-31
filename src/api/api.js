@@ -1,5 +1,3 @@
-// import { notify } from '../notification.js';
-
 export const settings = {
     host: ''
 }
