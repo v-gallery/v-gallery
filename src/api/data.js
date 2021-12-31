@@ -16,7 +16,7 @@ function createPointer(name, id) {
     };
 }
 
-function addOwner(object) {
+function addAuthor(object) {
     const userId = sessionStorage.getItem('userId');
     const result = Object.assign({}, object);
     result.author = createPointer('_User', userId);
@@ -34,7 +34,7 @@ export async function getItemById(id) {
 
 
 export async function createItem(item) {
-    const body = addOwner(item);    
+    const body = addAuthor(item);    
     return await api.post(host + '/classes/Item', body);
 }
    
