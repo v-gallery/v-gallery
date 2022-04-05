@@ -1,0 +1,92 @@
+/* customizing the library */
+/* variables & functions */
+/* base & layout */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+* {
+  color: inherit;
+  margin: 0;
+}
+
+body {
+  font-family: Poppins;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.test {
+  color: indigo;
+}
+
+/* widths not covered by those above */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+/* colors */
+
+.text-hover-secondary:hover {
+  color: #1ac888;
+}
+
+.bg-gray-light-9 {
+  background-color: #f2f2f2;
+}
+
+.text-white {
+  color: white;
+}
+
+/* components (button, card, navbar) */
+
+ .navbar-secondary {
+  padding: 1rem 2rem;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+}
+ .navbar-secondary .site-title {
+  font-size: 1.5rem;
+}
+
+.navbar-secondary {
+  background-color: #1ac888;
+}
+
+.badge-green {
+  border-radius: 80px;
+  background-color: #19e635;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+/* utilities (margin, padding, opacity) */
+
+.pt-3 {
+  padding-top: 4rem;
+}
+
+.pb-3 {
+  padding-bottom: 4rem;
+}
+
+.ml-1 {
+  margin-left: 0.75rem;
+}
+
+.mt-5 {
+  margin-top: 6rem;
+}
+
+.display-f {
+  display: flex;
+}

@@ -1,93 +1,55 @@
+import { getAccessToken, clearUserData } from '../utility.js';
+
 export const settings = {
-    host: ''
+    host: 'https://parseapi.back4app.com'
 }
 
-async function request(url, options) {
+async function request(method, url, data) {
+    const options = {
+        method,
+        headers:{
+            'X-Parse-Application-Id': '5pJfTwHqNO9y4tzWu7T7iD4o4pnCb790qlEcmSCa',
+            'X-Parse-REST-API-Key': 'lWiQrzrOj4nYcA0XSWue7FJ8CU1m1kAzRYz83RMY',
+            'X-Parse-Revocable-Session': '1'
+        }
+    }
+    
+    const token = getAccessToken();
+    
+    if (token != null) {
+        options.headers['X-Parse-Session-Token'] = token;
+    }  
+    
+    if (data) {
+        options.headers['Content-Type'] = 'application/json';
+        options.body = JSON.stringify(data);
+    }
+    
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(settings.host + url, options);
         
-        if(response.ok == false) {
-            const error = await response.json();
+        if (response.ok != true) {
+            if (response.status == 403) {
+                clearUserData();
+            }
+            const error = response.json();
             throw new Error(error.message);
         }
-        
-        try {
-            const data = await response.json();        
-            return data;
-        } catch(err) {
+
+        if (response.status == 204) {
             return response;
+        } else {
+            return response.json();
         }
                 
     } catch(err) {
         alert(err.message);
-        throw err;
+        throw err.message;
     }
 }
 
-function getOptions(method = 'get', body) {
-    const options = {
-        method,
-        headers: {
-            'X-Parse-Application-Id': 'BCrUQVkk80pCdeImSXoKXL5ZCtyyEZwbN7mAb11f',
-            'X-Parse-REST-API-Key': 'swrFFIXJlFudtF3HkZPtfybDFRTmS7sPwvGUzQ9w',
-        }
-    };
-     
-    const token = sessionStorage.getItem('authToken');
-    if (token != null) {
-        options.headers['X-Parse-Session-Token'] = token;
-    }
-    
-    if (body) {
-        options.headers['Content-Type'] = 'application/json';
-        options.body = JSON.stringify(body);
-    }
-    
-    return options;
-}
-
-export async function get(url) {
-    return await request(url, getOptions());
-}
-
-export async function post(url, data) {
-    return await request(url, getOptions('post', data));
-}
-
-export async function put(url, data) {
-    return await request(url, getOptions('put', data));
-}
-
-export async function del(url) {
-    return await request(url, getOptions('delete'));
-}
-
-export async function login(username, password) {
-    const result = await get(settings.host + '/login', {username, password});
-    
-    sessionStorage.setItem('username', username);
-    sessionStorage.setItem('authToken', result.sessionToken);
-    sessionStorage.setItem('userId', result.objectId);
-    
-    return result;
-}
-
-export async function register(email, username, password) {
-    const result = await post(settings.host + '/users', {email, username, password});
-    
-    sessionStorage.setItem('username', username);
-    sessionStorage.setItem('authToken', result.sessionToken);
-    sessionStorage.setItem('userId', result.objectId);
-    
-    return result;
-}
-
-export async function logout() {
-    const result = await post(settings.host + '/logout', {});
-    
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem('authToken');
-    sessionStorage.removeItem('userId');    
-    
-    return result;
-}
+/* Decoration functions */
+export const get = request.bind(null, 'get');
+export const post = request.bind(null, 'post');
+export const put = request.bind(null, 'put');
+export const del = request.bind(null, 'delete');

@@ -1,12 +1,16 @@
 import * as api from './api.js';
 
-const host = 'https://parseapi.back4app.com';
-api.settings.host = host;
-
-export const login = api.login;
-export const register = api.register;
-export const logout = api.logout;
-
+const endpoints = {
+    all: '/classes/Item',
+    byId: `/classes/Item/${id}`,
+    own: `/classes/Item/${id}`,
+    userItems: '',
+    create: '',
+    update: '',
+    remove: '',
+    sortByCriteria1: '',
+    sortByCriteria2: ''
+}
 
 function createPointer(name, id) {
     return {
@@ -23,25 +27,36 @@ function addAuthor(object) {
     return result;
 }
 
-// Item Collection
-export async function getItems() {
-    return await api.get(host + '/classes/Item');
-}    
+// Read Item Collection
+export async function getAll() {
+    return api.get(endpoints.all);
+} //  [{...}, {...}, {...}] ?
 
-export async function getItemById(id) {
-    return await api.get(host + '/classes/Item/' + id + '?include=author');
+export async function getById(id) {
+    return api.get(endpoints.byId);
 } 
 
+export async function getOwnItems(ownerId) {
+    // TODO write the query (authorId === userId)
+    return api.get(endpoints.own);
+}
 
+export async function getUserItems(userId) {
+    // TODO write the query (authorId === userId)
+    return api.get(endpoints.userItems);
+}
+
+// Create, Update, Delete 
 export async function createItem(item) {
     const body = addAuthor(item);    
-    return await api.post(host + '/classes/Item', body);
+    return api.post(endpoints.create, body);
 }
    
 export async function updateItem(id, item) {
-    return await api.put(host + '/classes/Item/' + id, item);
+    return api.put(endpoints.update + id, item);
 }
 
 export async function deleteItem(id) {
-    return await api.del(host + '/classes/Item/' + id);
+    return await api.del(endpoints.remove + id);
 }
+

@@ -2,7 +2,7 @@ import { html, render } from "../../lib.js";
 
 
 const template = () => html`
-<section id="editor" style="background: #ccc;">
+<section id="editor">
     <h2>Editor</h2> 
     <div className="formContainer"  style="background: #red;">
         <form className="form">
